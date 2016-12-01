@@ -29,6 +29,18 @@ module Less
         data
       end
 
+      #under construction
+      # #This must respond to 'call' to support Sprockets 3
+      # #original method in Tilt::Template is defined: def render(scope=nil, locals={}, &block)
+      # def self.call(input)
+      #   input[:scope] ||= Object.new
+      #   current_template = Thread.current[:tilt_current_template]
+      #   Thread.current[:tilt_current_template] = self
+      #   input[:scope].evaluate(input[:scope], input[:locals] || {}, input[:block])
+      # ensure
+      #   Thread.current[:tilt_current_template] = current_template
+      # end
+
     end
   end
 end

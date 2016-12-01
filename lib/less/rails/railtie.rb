@@ -16,8 +16,6 @@ module Less
       end
 
       initializer 'less-rails.before.load_config_initializers', :before => :load_config_initializers, :group => :all do |app|
-        sprockets_env = app.assets || Sprockets
-
         config.assets.configure do |env|
           if env.respond_to?(:register_transformer)
             env.register_mime_type 'text/less', extensions: ['.less'], charset: :css
@@ -28,6 +26,10 @@ module Less
             args = ['.less', LessTemplate]
             args << {mime_type: 'text/less', silence_deprecation: true } if Sprockets::VERSION.start_with?("3")
             env.register_engine(*args)
+          end
+
+          if env.respond_to?(:register_preprocessor)
+            env.register_preprocessor 'text/css', ImportProcessor
           end
 
           env.context_class.class_eval do
