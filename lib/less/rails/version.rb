@@ -1,5 +1,5 @@
 module Less
   module Rails
-    VERSION = "2.8.0.pre.rails5"
+    VERSION = "2.8.0"
   end
 end
